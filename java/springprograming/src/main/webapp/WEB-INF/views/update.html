@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<div align="center">
+    <h1>Update Employee</h1>
+
+    <form action="#" th:action="@{/insert}" th:object="${employee}"
+          method="POST">
+
+        <input type="hidden" th:field="${employee.id}" />
+
+        <input type="text" th:field="${employee.Name}">
+
+        <input type="text" th:field="${employee.Age}" pattern="^[1-9]{1}[0-9]{1}$">
+
+        <input type="text" th:field="${employee.Email}" pattern="[A-Za-z0-9]+@[a-z0-9]+\.[a-z]{2,6}">
+
+        <button type="submit" style = "background-color: aqua"> Update Employee</button>
+    </form>
+
+    <button style = "background-color: aqua">
+        <a th:href = "@{/}"> Back List</a>
+    </button>
+
+</div>
+</body>
+</html>

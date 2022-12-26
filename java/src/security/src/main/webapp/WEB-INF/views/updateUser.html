@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>update USer</h1>
+
+<form th:action="@{/update}" th:object="${userUpdate}" method="POST">
+
+  <input type="text" th:field="${userUpdate.userName}" placeholder="userName" ><br/>
+  <br/>
+
+  <input type="text" th:field="${userUpdate.password}" placeholder="password">
+  <br/><br/>
+
+  <select id="userEnum" name="userEnum"  >
+    <option value="ACTIVE">ACTIVE</option>
+    <option value="DELETE">DELETE</option>
+    <option value="UNACTIVE">UNACTIVE</option>
+  </select>
+<!--  <input type="text" th:field="${userUpdate.status.DELETE}" placeholder="status">-->
+
+  <button>
+    <a th:href="@{/list-users}">Back</a>
+  </button>
+  <button type="submit" >Update</button>
+</form>
+
+</body>
+</html>

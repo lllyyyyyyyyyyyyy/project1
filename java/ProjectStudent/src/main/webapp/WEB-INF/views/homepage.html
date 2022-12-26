@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        tr:nth-child(even) {
+            background-color: aquamarine;
+        }
+        tr:nth-child(odd) {
+            background-color: burlywood;
+        }
+        table, td {
+            border: 3px solid yellowgreen;
+            border-collapse: collapse;
+        }
+        th{
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>
+ <h1 style="font-size:300%" align="center">  My Project </h1>
+<button style="background-color: aqua">
+    <p><a href="#Student">Student</a></p>
+</button>
+ <button style="background-color: aqua">
+     <p><a href="#Class">CLass</a></p>
+ </button>
+ <button style="background-color: aqua">
+     <p><a href="#Join">Join Table</a></p>
+ </button>
+ <form  th:action="@{/findbykeyword}" method="POST" align="center">
+     <input type="text" id="keyword" name="keyword">
+     <button type="submit" style="background-color: aqua">Find</button>
+     <button style="background-color: aqua">
+         <a th:href="@{/}" >Exit</a>
+     </button><br/><br/>
+ </form>
+
+     <table align="center" style="width:50%" border="1">
+         <tr th:each="find:${findList}" align="center">
+             <td th:text="${find.id}"></td>
+             <td th:text="${find.name}"></td>
+             <td th:text="${find.date_of_birth}"></td>
+             <td th:text="${find.address}"></td>
+             <td th:text="${find.class_id}"></td>
+         </tr>
+     </table>
+
+
+
+ <div>
+     <hr>
+     <h2 id = "Student" style="color: crimson">Student</h2>
+     <div align="center">
+
+         <h3 align="center">List Of Student</h3>
+         <table align="center" style="width:50%" border="1" >
+             <thead style="background-color: darkslateblue">
+             <tr>
+                 <th>ID</th>
+                 <th>Name</th>
+                 <th>Date Of Birth</th>
+                 <th>Address</th>
+                 <th>ID Class</th>
+                 <th>
+                     <button style="background-color: aqua">
+                         <a href="/addStudent">insert student</a>
+                     </button>
+                 </th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr th:each="student:${list}" align="center">
+                 <td th:text="${student.id}"></td>
+                 <td th:text="${student.name}"></td>
+                 <td th:text="${student.date_of_birth}"></td>
+                 <td th:text="${student.address}"></td>
+                 <td th:text="${student.class_id}"></td>
+                 <td>
+                     <button style="background-color: aqua">
+                         <a th:href="@{/update/{id}(id=${student.id})}">Update</a>
+                     </button>
+                     <button style="background-color: aqua">
+                         <a th:href="@{delete/{id}(id=${student.id})}">Delete</a>
+                     </button>
+                 </td>
+             </tr>
+             </tbody>
+
+         </table>
+         <br/>
+
+
+
+
+     </div>
+
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+     <br/>
+
+
+
+
+
+
+
+
+     <div>
+         <hr>
+         <h2 id = "Class" style="color: crimson">Class</h2>
+         <table align="center" style="width:20%" border="1">
+             <thead style="background-color: darkslateblue">
+             <tr>
+                 <th>Class ID</th>
+                 <th>Class Name</th>
+                 <th>Teacher ID</th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr th:each="class:${listClass}" align="center">
+                 <td th:text="${class.class_id}"></td>
+                 <td th:text="${class.class_name}"></td>
+                 <td th:text="${class.teacher_id}"></td>
+             </tbody>
+         </table>
+     </div>
+ </div>
+
+<div>
+
+    <hr>
+    <h2 id = "Join" style="color: crimson">Join table</h2>
+    <table align="center" style="width:80%">
+        <thead style="background-color: darkslateblue">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date Of Birth</th>
+            <th>Address</th>
+            <th>Class ID</th>
+            <th>Class Name</th>
+            <th>Teacher ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="infor:${list}" align="center">
+            <td th:text="${infor.id}"></td>
+            <td th:text="${infor.name}"></td>
+            <td th:text="${infor.date_of_birth}"></td>
+            <td th:text="${infor.address}"></td>
+            <td th:text="${infor.class_id}"></td>
+            <td th:text="${infor.classroom.class_name}"></td>
+            <td th:text="${infor.classroom.teacher_id}"></td>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

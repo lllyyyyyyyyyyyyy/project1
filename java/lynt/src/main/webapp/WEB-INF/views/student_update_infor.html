@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style >
+    /*body div {*/
+    /*    text-align: center;*/
+    /*}*/
+    h3{
+      display: inline-block;
+      margin: 20px 0;
+    }
+    input[type=text], input[type=password],input[type=number], input[type=email] {
+      display: inline-block;
+      width: 30%;
+      box-sizing: border-box;
+      margin: 20px 20px;
+      padding: 15px 20px;
+      border-radius:15px;
+    }
+    button{
+      background-color: dimgrey;
+      text-decoration: none;
+      width:10%;
+      padding: 15px 20px;
+      margin: 20px 20px;
+      box-sizing: border-box;
+
+    }
+  </style>
+</head>
+<body>
+<div style="background-color: #888888;
+        padding: 30px 0;
+        padding-bottom: 100%;
+        padding-top: 100px;
+        color: white;">
+  <h1 style="font-size: 400%;text-align: center" >
+    Student Update Information
+  </h1>
+  <div style="width: 100%" >
+    <form th:action="@{/student/update-infor}" th:object="${student}" method="POST">
+
+      <div align="right" style="padding-right: 38%">
+        <input type="hidden" th:field="${student.studentId}" placeholder="student Id" ><br/>
+
+        <h3>User Name: </h3><input type="text" th:field="${student.userName}" placeholder="student Name" ><br/>
+
+
+        <h3>Date Of Birth: </h3><input type="text" th:field="${student.dateOfBirth}" placeholder="Date of birth">
+        <br/>
+
+        <h3>Address: </h3><input type="text" th:field="${student.address}" placeholder="Address" ><br/>
+
+
+        <h3>Email: </h3><input type="email" th:field="${student.email}" placeholder="Email" ><br/>
+
+
+        <input type="hidden" th:field="${student.studentId}" placeholder="Student Id" >
+
+
+        <h3>Full Name</h3><input type="text" th:field="${student.fullName}" placeholder="Fullname" ><br/>
+
+        <h3>Password</h3><input type="text" th:field="${student.password}" placeholder="Password" ><br/>
+      </div>
+     <div align="center">
+       <button style="background-color: darkcyan;border-radius:15px" align="center">
+         <a th:href="@{/student}">Back</a>
+       </button>
+       <button type="submit"  style="background-color: darkcyan;border-radius:15px" align="center">Save</button>
+     </div>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

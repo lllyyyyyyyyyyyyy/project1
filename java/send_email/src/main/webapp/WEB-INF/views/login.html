@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>Login</h1>
+
+<form method="POST" th:action = "@{/checklogin}" th:objetc="${loginRequest}">
+
+  UserName: <input type="text" th:field = "*{loginRequest.email}">
+  <!--    <div th:if="${#fields.hasErrors('email')}" th:errors = "*{loginRequest.email}"></div>-->
+  <br/>
+  <br/>
+  Password: <input type="password" th:field = "*{loginRequest.password}">
+  <!--    <div th:if="${#fields.hasErrors('password')}" th:errors = "*{loginRequest.password}"></div>-->
+  <br/>
+  <button type="submit">Login</button>
+  <button>
+    <a th:href="@{/}">Back</a>
+  </button>
+</form>
+</body>
+</html>

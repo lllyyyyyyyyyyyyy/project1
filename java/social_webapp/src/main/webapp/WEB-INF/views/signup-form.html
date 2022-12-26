@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form th:action="@{/user/create}" th:object="${user}" method="POST">
+  <input type="text" th:field="${user.name}" placeholder="name"><br/>
+  <br/><br/>
+  <input type="text" th:field="${user.email}" placeholder="Email" pattern="(?=.{1,64}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})" title="Email is not valid">
+  <br/><br/>
+  <input type="text" th:field="${user.phoneNumber}" placeholder="Phone number" pattern="[0-9]{6,12}" title="Phone number is not valid">
+  <br/><br/>
+  <input type="text" id = "password" name="password"  placeholder="Password"><br/><br/>
+
+  <input type="text" id="re-password" name="re-password" placeholder="Re-enter Password"><br/><br/>
+
+  <input type="text" th:field="${user.dateOfBirth}" placeholder="Date Of Birth" pattern="\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])" title="Date of Birth is not valid"><br/><br/>
+  <select name="gender" id="gender">
+    <option value="male">male</option>
+    <option value="female">female</option>
+    <option value="custom">custom</option>
+  </select>
+  <br/><br/>
+
+  <h3 th:if = "${mess}"><i>mess</i></h3>
+  <h3 th:if = "${mess2}"><i>mess2</i></h3>
+  <button>
+    <a th:href="@{/}">Back</a>
+  </button>
+  <button type="submit" >Save</button>
+</form>
+</body>
+</html>

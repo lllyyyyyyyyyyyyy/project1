@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<div align="center">
+  <h1>Update Student</h1>
+
+  <form action="#" th:action="@{/insert}" th:object="${student}"
+        method="POST">
+
+    <input type="number" th:field="${student.id}">
+
+    <input type="text" th:field="${student.name}" pattern="[a-zA-Z ]{6,20}">
+
+    <input type="date" th:field="${student.date_of_birth}">
+
+    <input type="text" th:field="${student.address}">
+
+    <input type="text" th:field="${student.class_id}">
+    <button type="submit"> Update</button>
+  </form>
+
+  <button>
+    <a th:href = "@{/}"> Back List</a>
+  </button>
+
+</div>
+</body>
+</html>

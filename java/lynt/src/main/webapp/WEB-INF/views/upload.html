@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input{
+            width: 30%;
+            box-sizing: border-box;
+            margin: 0 0;
+            padding: 15px 20px;
+            border-radius:15px;
+        }
+    </style>
+</head>
+<body>
+<div style="background-color: #888888;
+        padding: 30px 0;
+        padding-bottom: 100%;
+        padding-top: 150px;
+        color: white;" align="center">
+    <form th:action="@{/users/uploadUser}" method="post" enctype="multipart/form-data">
+       <h2><p>Please Choose File Excel:</p></h2>
+        <div align="center">
+            <button style="border-radius:15px; width: 30%; background-color: darkgrey;">
+                <input type="file" id="file" name="file">
+            </button>
+        </div>
+        <div>
+            <button type="submit" style="background-color: darkcyan;
+          border-radius:15px;
+          text-decoration: none;
+          width:30%;
+          padding: 15px 20px;
+          margin: 8px 20px;
+          box-sizing: border-box;" align="center">Upload</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

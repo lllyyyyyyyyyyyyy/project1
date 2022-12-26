@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>member_group</h1>
+<div th:if="${listOfUserOnGroup}">
+  <tr th:each="user:${listOfUserOnGroup}" align="center">
+    <div th:if = "${user.profilePicture}">
+      <img th:src="${user.profilePicture}" width="200px" height="200px">
+    </div>
+    <div>
+      <p th:text = "${user.name}" ></p>
+    </div>
+  </tr>
+</div>
+</body>
+</html>

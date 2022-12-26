@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <style >
+        /*body div {*/
+        /*    text-align: center;*/
+        /*}*/
+        h3{
+            display: inline-block;
+            margin: 20px 0;
+        }
+        input[type=text], input[type=password],input[type=number], select {
+            display: inline-block;
+            width: 30%;
+            box-sizing: border-box;
+            margin: 20px 20px;
+            padding: 15px 20px;
+            border-radius:15px;
+        }
+        button{
+            background-color: dimgrey;
+            text-decoration: none;
+            width:10%;
+            padding: 15px 20px;
+            margin: 20px 20px;
+            box-sizing: border-box;
+
+        }
+    </style>
+</header>
+<body>
+<div style="background-color: #888888;
+        padding: 30px 0;
+        padding-bottom: 100%;
+        padding-top: 100px;
+        color: white;">
+    <h1 style="font-size: 400%;text-align: center" >insert Role</h1>
+    <div style="width: 100%" >
+        <form th:action="@{/users/insert-role}" th:object="${role}" method="POST">
+            <div align="right" style="padding-right: 38%">
+                <h3>User Id: </h3><input type="number" th:field="${role.userId}" placeholder="User Id" ><br/>
+                <br/>
+
+                <h3>Role Id:</h3><select name="roleId" id="roleId">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                    </select>
+<!--                <h3>Role Id: </h3><input type="number" th:field="${role.roleId}" placeholder="Role Id">-->
+<!--                <br/><br/>-->
+            </div>
+            <div align="center">
+                <button style="background-color: darkcyan;border-radius:15px" align="center">
+                    <a th:href="@{/users/crud-user}">Back</a>
+                </button>
+                <button type="submit" style="background-color: darkcyan;border-radius:15px" align="center" >Save</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+<!--<h1 th:text ="${text}"></h1>-->
+</body>
+</html>

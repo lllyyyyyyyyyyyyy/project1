@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a:hover {
+            background-color: #111111;
+        }
+
+        table {
+            background-color: azure;
+        }
+
+        body {
+            background-color: dimgrey;
+        }
+    </style>
+</head>
+<body>
+
+<ul style="list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;">
+    <div>
+        <div>
+            <li><a th:href="@{/}">Home Page</a></li>
+        </div>
+        <div th:if="${#lists.contains(roles, 'ADMIN')}">
+            <li><a th:href="@{/users/crud-user}">User</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles, 'ADMIN') ||#lists.contains(roles, 'STUDENT') || #lists.contains(roles, 'TEACHER')}">
+            <li><a th:href="@{/subject}">Subject</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles, 'ADMIN') || #lists.contains(roles, 'STUDENT') || #lists.contains(roles, 'TEACHER')}">
+            <li><a th:href="@{/classroom}">Classroom</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles,'STUDENT') || #lists.contains(roles,'ADMIN') }">
+
+            <li><a th:href="@{/student}">Student</a></li>
+        </div>
+        <li><a href="#about">About</a></li>
+<!--        <li style="float: right;"><a th:href="@{/login}">Login</a></li>-->
+        <div th:if="${roles}">
+            <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>
+        </div>
+    </div>
+</ul>
+<h1 style="font-size: 500%;text-align: center;color: azure; margin-top: 400px">
+    Welcome To My Project!
+</h1>
+<!--<h1>-->
+<!--    <a th:href="@{/login}">Login</a>-->
+<!--    <br/>-->
+<!--    <a th:href="@{/login?logout=true}">Logout</a>-->
+<!--    <br/>-->
+<!--    <div th:if="${#lists.contains(roles, 'ADMIN')}">-->
+<!--        <a th:href="@{/users/crud-user}">CRUD USER</a>-->
+<!--        <br/>-->
+<!--    </div>-->
+<!--    <a th:href="@{/subject}">CRUD SUject</a>-->
+<!--    <br/>-->
+<!--    <a th:href="@{/classroom}">CRUD CLass</a>-->
+<!--    <br/>-->
+<!--    <a th:href="@{/student}">CRUD Student And Teacher</a>-->
+
+<!--    <span th:text="${roles}"></span>-->
+<!--    <span th:text="${authorities}"></span>-->
+</h1>
+</body>
+</html>

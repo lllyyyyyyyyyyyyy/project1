@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>schedule table</h1>
+<h2 th:text="${className}"></h2>
+<table align="center" style="width:80%" border="1" >
+    <thead>
+    <tr>
+        <th>Time</th>
+        <th>MON</th>
+        <th>TUE</th>
+        <th>WED</th>
+        <th>THU</th>
+        <th>FRI</th>
+        <th>SAT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="i:${schedule}" align="center">
+        <td th:text="${i.time}"></td>
+        <td th:text="${i.mon}"></td>
+        <td th:text="${i.tue}"></td>
+        <td th:text="${i.wed}"></td>
+        <td th:text="${i.thu}"></td>
+        <td th:text="${i.fri}"></td>
+        <td th:text="${i.sat}"></td>
+    </tr>
+    </tbody>
+</table>
+<button>
+    <a th:href="@{/classroom/download}">Download</a>
+</button>
+
+
+</body>
+</html>

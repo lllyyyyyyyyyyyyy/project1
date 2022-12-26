@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+        h1{
+            color: white;
+            text-align: center;
+            padding: 26px;
+            text-decoration: none;
+        }
+        li a, h2 {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a:hover {
+            background-color: #111111;
+        }
+
+        table{
+            background-color: antiquewhite;
+            text-align: center;
+            font-size: 26px;
+            padding: 10px;
+        }
+        /*th, td {*/
+        /*    background-color: darkgrey;*/
+        /*}*/
+
+        body {
+            background-color: dimgrey;
+        }
+        button{
+            display: inline-block;
+            padding: 10px;
+            background-color: cornflowerblue;
+            color: #555;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        input, select {
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        .lyIdol1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<ul style="list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;">
+    <div>
+        <div>
+            <li><a th:href="@{/}">Home Page</a></li>
+        </div>
+        <div th:if="${#lists.contains(roles, 'ADMIN')}">
+            <li><a th:href="@{/users/crud-user}">User</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles, 'ADMIN') ||#lists.contains(roles, 'STUDENT') || #lists.contains(roles, 'TEACHER')}">
+            <li><a th:href="@{/subject}">Subject</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles, 'ADMIN') || #lists.contains(roles, 'STUDENT') || #lists.contains(roles, 'TEACHER')}">
+            <li><a th:href="@{/classroom}">Classroom</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles,'STUDENT') || #lists.contains(roles,'ADMIN') }">
+
+            <li><a th:href="@{/student}">Student</a></li>
+        </div>
+        <li><a href="#about">About</a></li>
+        <div th:if="${roles}">
+            <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>
+        </div>
+<!--        <li style="float: right;"><a th:href="@{/login}">Login</a></li>-->
+
+    </div>
+</ul>
+
+<div>
+    <form class="lyIdol1" th:action="@{/users/find}" method="POST" align="center">
+        <h2>Find:</h2>
+        <input type="text" id="keyword" name="keyword"  placeholder="Search">
+        <button style="text-align: right; margin-left: 10px" type="submit">Find</button>
+    </form>
+</div>
+
+    <h1 th:text = "${message}"></h1>
+<div th:if = "${findList}">
+    <table align="center" style="width:30%;" border="1">
+        <tr th:each="find:${findList}" align="center">
+            <td th:text="${find.id}"></td>
+            <td th:text="${find.userId}"></td>
+            <td th:text="${find.user?.userName}"></td>
+            <td th:text="${find.user?.password}"></td>
+            <td th:text="${find.user?.enabled}"></td>
+            <td th:text="${find.roleId}"></td>
+            <td th:text="${find.role?.roleName}"></td>
+            <td>
+                <button>
+                    <a th:href="@{/users/update/{id}(id=${find.id})}"> Update</a>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+    <h1 align="center" style="padding: 50px" >List Of User</h1>
+    <div align="center">
+        <button >
+            <a th:href="@{/users/upload}">Upload File</a>
+        </button>
+        <br/>
+    </div>
+
+    <table align="center" style="width:50%" border="1" >
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>Password</th>
+            <th>Enabled</th>
+            <!--        <th>Action</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user:${getAllUser}" align="center">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.userName}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.enabled}"></td>
+            <!--        <td></td>-->
+        </tr>
+        </tbody>
+    </table>
+
+    <table align="center" style="width:50%" border="1" >
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>Password</th>
+            <th>Enabled</th>
+            <th>Role Id</th>
+            <th>Role Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <h1 align="center" style="padding: 50px" >List Of User And Role</h1>
+        <div align="center">
+            <button>
+                <a th:href="@{/users/addUser}">Add User</a>
+            </button>
+<br/>
+            <button><a th:href="@{/users/export-excel}">Export Excel</a></button>
+            <br/>
+        </div>
+
+        <tr th:each="userrole:${getAllUserAndRole}" align="center">
+            <td th:text="${userrole.id}"></td>
+            <td th:text="${userrole.userId}"></td>
+            <td th:text="${userrole.user?.userName}"></td>
+            <td th:text="${userrole.user?.password}"></td>
+            <td th:text="${userrole.user?.enabled}"></td>
+            <td th:text="${userrole.roleId}"></td>
+            <td th:text="${userrole.role?.roleName}"></td>
+            <!--        <td th:text="${user.classroom.course.name}"></td>-->
+        </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>

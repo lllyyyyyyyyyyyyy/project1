@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table{background-color: antiquewhite;
+        text-align: center;
+            font-size: 26px;
+        }
+        body {background-color: dimgrey;
+        }
+        /*button{*/
+        /*    background-color: dimgrey;*/
+        /*    text-decoration: none;*/
+        /*    display: block;*/
+        /*}*/
+        h1 , h2 {color: azure;}
+        p {color: blue;}
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+        }
+        button{
+            padding: 10px;
+            background-color: cornflowerblue;
+            color: #555;
+            /*float: left;*/
+            text-align: center;
+
+            font-size: 16px;
+
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111111;
+        }
+        input, select {
+            /*width: 50%;*/
+            /*padding: 12px 20px;*/
+            /*margin: 8px 0;*/
+            /*box-sizing: border-box;*/
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            width: 25%;
+            padding: 10px;
+            /*float: left;*/
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><a th:href="@{/}">Home</a></li>
+    <li><a th:href="@{/course/}">Course</a></li>
+    <li><a th:href="@{/classroom/}">Classroom</a></li>
+    <li><a th:href="@{/student/}">Student</a></li>
+    <li><a th:href="@{/subject/}">Subject</a></li>
+    <li><a th:href="@{/schedule/}">Schedule</a></li>
+    <li><a href="#about">About</a></li>
+</ul>
+
+<div style="background-color: #888888;
+        padding: 30px 40px;
+        color: white;
+        text-align: center;">
+
+    <h1  style="padding: 50px" >List Of Course</h1>
+
+    <form  th:action="@{/course/find}" method="POST" align="center">
+        <input type="text" id="keyword" name="keyword"  placeholder="Search"  >
+        <button type="submit" >Find</button>
+    </form>
+    <br/>
+    <button>
+        <a th:href="@{/course/add}" style="text-decoration:none">ADD</a>
+    </button>
+
+</div>
+<table align="center" style="width:30%;" border="1" >
+    <tr th:each="find:${findList}" align="center">
+        <td th:text="${find.id}"></td>
+        <td th:text="${find.code}"></td>
+        <td th:text="${find.name}"></td>
+    </tr>
+</table>
+
+
+<br/>
+<br/>
+
+<table align="center" style="width:30%;padding: 10px;" border="1" >
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course:${courseList}" align="center">
+            <td th:text="${course.id}"></td>
+            <td th:text="${course.code}"></td>
+            <td th:text="${course.name}"></td>
+            <td>
+                <button>
+                    <a th:href="@{/course/update/{id}(id=${course.id})}" style="text-decoration:none">Update</a>
+                </button>
+                <button>
+                    <a th:href="@{/course/delete/{id}(id =${course.id})}" style="text-decoration:none">delete</a>
+                </button>
+            </td>
+        </tr>
+
+        </tbody>
+
+    </table>
+
+
+
+</body>
+</html>

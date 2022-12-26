@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<div  style="width:50%" align="center">
+    <hr>
+    <h1 >Insert Employee</h1>
+
+    <form th:action="@{/insert}" th:object="${student}" method="POST">
+        <input type="text" th:field="${student.id}" placeholder="Id" ><br/> <br/>
+        <input type="text" th:field="${student.name}" placeholder="Name" pattern="[a-zA-Z ]{6,20}"
+               title="Name is not valid. Form: [a-zA-Z ]{6,20}"><br/>
+        <br/>
+
+        <input type="date" th:field="${student.date_of_birth}" placeholder="Date Of Birth">
+        <br/><br/>
+        <input type="text" th:field="${student.address}" placeholder="Address"><br/><br/>
+
+        <input type = "text" th:field="${student.class_id}" placeholder="Class ID">
+        <br/>
+
+        <button>
+            <a th:href="@{/}"> Back List</a>
+        </button>
+
+        <button type="submit" >Save</button>
+    </form>
+    <hr>
+
+</div>
+</body>
+</html>

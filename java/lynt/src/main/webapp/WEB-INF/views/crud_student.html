@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        h1{
+            color: white;
+            text-align: center;
+            padding: 26px;
+            text-decoration: none;
+        }
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a:hover {
+            background-color: #111111;
+        }
+
+        table{
+            background-color: antiquewhite;
+            text-align: center;
+            font-size: 26px;
+            padding: 10px;
+        }
+
+        body {
+            background-color: dimgrey;
+        }
+        button{
+            display: block;
+            padding: 10px;
+            background-color: cornflowerblue;
+            color: #555;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<ul style="list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;">
+    <div>
+        <div>
+            <li><a th:href="@{/}">Home Page</a></li>
+        </div>
+        <div th:if="${#lists.contains(roles, 'ADMIN')}">
+            <li><a th:href="@{/users/crud-user}">User</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles, 'ADMIN') ||#lists.contains(roles, 'STUDENT') || #lists.contains(roles, 'TEACHER')}">
+            <li><a th:href="@{/subject}">Subject</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles, 'ADMIN') || #lists.contains(roles, 'STUDENT') || #lists.contains(roles, 'TEACHER')}">
+            <li><a th:href="@{/classroom}">Classroom</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles,'STUDENT') || #lists.contains(roles,'ADMIN') }">
+
+            <li><a th:href="@{/student}">Student</a></li>
+        </div>
+        <li><a href="#about">About</a></li>
+<!--        <li style="float: right;"><a th:href="@{/login}">Login</a></li>-->
+        <div th:if="${roles}">
+            <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>
+        </div>
+    </div>
+</ul>
+
+
+
+<h1>Student Page</h1>
+
+<table align="center" style="width:100%" border="1" >
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>student Id</th>
+        <th>student Name</th>
+        <th>Date Of Birth</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th>Full Name</th>
+        <th>Password</th>
+        <th>Avatar</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student:${getAllStudent}" align="center">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.studentId}"></td>
+        <td th:text="${student.userName}"></td>
+        <td th:text="${student.dateOfBirth}"></td>
+        <td th:text="${student.address}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.fullName}"></td>
+        <td th:text="${student.password}"></td>
+        <td>
+            <img th:src="${student.avatar}" width="50px" height="50px">
+        </td>
+        <td>
+            <div th:if="${#lists.contains(roles, 'STUDENT')}">
+                <button><a th:href="@{/student/update-{id}(id =${student.id})}">Update Image</a></button>
+                <button><a th:href="@{/student/update-infor-{id}(id =${student.id})}">Update Infor</a></button>
+                <button><a th:href="@{/student/delete-image/{id}(id =${student.id})}">Delete Image</a></button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3 th:if = "${messenger_delete}">
+    messenger_delete
+</h3>
+</body>
+</html>

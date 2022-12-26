@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>User List</h1>
+
+<table align="center" style="width:30%;padding: 10px;" border="1" >
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Password</th>
+        <th>Action</th>
+        <th> Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user:${listUser}" align="center">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.userName}"></td>
+        <td th:text="${user.password}"></td>
+
+
+        <td>
+            <a th:href="@{/updateUser/{id}(id =${user.id})}" style="text-decoration:none">UPDATE USER</a>
+
+        </td>
+        <td th:text="${user.userEnum}"></td>
+
+
+<!--        <td th:each="i:${user.userEnum}">-->
+<!--            <select>-->
+<!--                <a th:href="@{/user/delete-user}" style="text-decoration:none">-->
+<!--                    <option th:value="${i.DELETE}" th:text="${i.DELETE}"></option>-->
+<!--                </a>-->
+
+<!--                <a th:href="@{/user/active-user}" style="text-decoration:none">-->
+<!--                    <option th:value="${i.ACTIVE}" th:text="${i.ACTIVE}"></option>-->
+<!--                </a>-->
+
+<!--                <a th:href="@{/user/unactive-user}" style="text-decoration:none">-->
+<!--                    <option th:value="${i.UNACTIVE}" th:text="${i.UNACTIVE}"></option>-->
+<!--                </a>-->
+
+<!--            </select>-->
+
+
+    </tr>
+
+    </tbody>
+
+</table>
+<BUTTON><a th:href="@{/login}">login</a></BUTTON>
+<BUTTON><a th:href="@{/upload}">Upload</a></BUTTON>
+<button><a th:href="@{/export-excel}">Export Excel</a></button>
+<h2 th:text = "${message}"></h2>
+<!--<BUTTON><a th:href="@{/upload-file-excel}">Upload File Excel</a></BUTTON>-->
+</body>
+</html>

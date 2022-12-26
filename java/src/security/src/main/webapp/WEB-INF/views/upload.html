@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>upload</h1>
+<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+    <button>
+        <input type="file" id="file" name="file">
+        <button type="submit">Upload</button>
+    </button>
+</form>
+<!--<form method="POST" th:action = "@{/upload}" >-->
+
+<!--    <input type="text" th:field = "${file}">-->
+<!--    &lt;!&ndash;    <div th:if="${#fields.hasErrors('email')}" th:errors = "*{loginRequest.email}"></div>&ndash;&gt;-->
+<!--    <br/>-->
+<!--    <br/>-->
+
+<!--    <button type="submit">Upload</button>-->
+<!--    <button>-->
+<!--        <a th:href="@{/}">Back</a>-->
+<!--    </button>-->
+<!--</form>-->
+
+</body>
+</html>

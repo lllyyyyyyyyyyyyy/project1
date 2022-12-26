@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    input{
+      /*display: inline-block;*/
+      width: 30%;
+      /*padding: 12px 20px;*/
+      box-sizing: border-box;
+      margin: 0 0;
+      padding: 15px 20px;
+      /*float: right;*/
+      /*padding-left: 0;*/
+      /*padding-bottom: 15px;*/
+      /*padding-top: 15px;*/
+      /*padding-right: 0;*/
+      border-radius:15px;
+      /*float: right;*/
+      /*display: block;*/
+    }
+  </style>
+</head>
+<body>
+<div style="background-color: #888888;
+        padding: 30px 0;
+        padding-bottom: 100%;
+        padding-top: 150px;
+        color: white;">
+  <div style="width: 100%" align="center">
+    <form th:action="@{/subject/upload-document}" th:object="${subject}" method="post" enctype="multipart/form-data">
+      <div>
+        <h2><p>Please Choose File:</p></h2>
+        <div align="center">
+          <button style="border-radius:15px; width: 30%; background-color: darkgrey;">
+            <input type="hidden" id="subjectId" name="subjectId" th:field="${subject.id}">
+            <input style="border-radius:15px;" type="file" id="file" name="file">
+          </button>
+        </div>
+        <div>
+          <button type="submit" style="background-color: darkcyan;
+          border-radius:15px;
+          text-decoration: none;
+          width:30%;
+          padding: 15px 20px;
+          margin: 8px 20px;
+          box-sizing: border-box;" align="center" >Upload</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

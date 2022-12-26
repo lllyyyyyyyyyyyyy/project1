@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div  style="width:50%" align="center">
+  <hr>
+  <h1 >Find Employee By Id</h1>
+
+  <form th:action="@{/find}" method="post">
+    <input type="number" id="id" name="id" value="${id}"><br>
+<!--    <input type="number" th:field="${id}" placeholder="Id"><br/>-->
+    <button style = "background-color: aqua">
+      <a th:href="@{/}"> Back List</a>
+    </button>
+
+    <button type="submit" style = "background-color: aqua">Save</button>
+  </form>
+
+  <hr>
+
+</div>
+
+</body>
+</html>

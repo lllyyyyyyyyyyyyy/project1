@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+
+        }
+
+        h2{
+            display: inline-block;
+            margin: 20px 0;
+            color: azure;
+        }
+        li {
+            float: left;
+        }
+
+        li a:hover ul {
+            background-color: #111111;
+        }
+
+        table{
+            background-color: antiquewhite;
+            text-align: center;
+            font-size: 26px;
+            padding: 10px;
+        }
+
+        body {
+            background-color: dimgrey;
+        }
+        button{
+            display: block;
+            padding: 10px;
+            background-color: cornflowerblue;
+            color: #555;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .intro{
+
+            margin-left: 72px;
+            margin-top: 100px;
+
+        }
+        .post{
+            margin-top: 100px;
+            margin-left: 20%;
+        }
+    </style>
+</head>
+<body>
+<ul style="list-style-type: none;
+            top: 0;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+            position: fixed;">
+    <div>
+        <div><li><a style="font-family:'Courier New';font-size:30px"><b>facebook</b></a></li></div>
+
+        <div>
+            <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>
+        </div>
+        <!--        <div th:if="${roles}">-->
+        <!--            <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>-->
+        <!--        </div>-->
+    </div>
+</ul>
+<ul style="
+            top: 65px;
+            width: 280px;
+            height: 100%;
+            padding: 7px;
+            overflow: hidden;
+            background-color: #333333;
+            position: fixed;
+            ">
+    <div>
+        <li><a th:href="@{/home}">Home</a></li>
+    </div>
+<br/><br/><br/>
+    <div>
+        <li><a th:href="@{/user/home}">Account</a></li>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+        <ul style="color: azure">
+            <li><a th:href="@{/user/edit-profile/{userName}(userName =${getName})}">Update Infor</a></li>
+            <li><a th:href="@{/user/update-password/{userName}(userName =${getName})}">Update Password</a></li>
+            <li><a th:href="@{/user/update-email/{userName}(userName =${getName})}">Update Email</a></li>
+            <li><a th:href="@{/user/add-profile-picture/{userName}(userName =${getName})}">Add Profile picture</a></li>
+            <li><a th:href="@{/user/add-cover-picture/{userName}(userName =${getName})}">Add Cover picture</a></li>
+            <li><a th:href="@{/post/add-post-user/{userName}(userName =${getName})}">Add Post</a></li>
+        </ul>
+    </div>
+    <br/><br/><br/>
+
+</ul>
+<div style="background-color: #111111">
+    <div style="background-color: #555555;padding: 15%;width: 109%;margin-left: 98px;margin-top: -98px;">
+        <div th:if = "${user.coverPicture}" >
+            <img th:src="${user.coverPicture}">
+        </div>
+        <div th:if = "${user.profilePicture}" style="display: flex">
+            <div>
+                <img th:src="${user.profilePicture}" width="200px" height="200px">
+            </div>
+            <div style="margin-top: 130px">
+                <h1 th:text = "${user.name}"></h1>
+            </div>
+        </div>
+
+        <div style="display: flex;
+flex-direction: column">
+            <div class="intro">
+                <button style="background-color: #333333;float: left" >
+                    <h1>Introduction: </h1><br/>
+                    Date Of Birth: <h2 th:text = "${user.dateOfBirth}"></h2><br/>
+                    Gender: <h2 th:text = "${user.gender}"></h2><br/>
+                    Email: <h2 th:text = "${user.email}"></h2><br/>
+                    Phone Number: <h2 th:text = "${user.phoneNumber}"></h2>
+                </button>
+            </div>
+            <div class="post" th:each="post:${posts}">
+                <button style="background-color: #333333">
+                    <div style="display: flex">
+                        <div>
+                            <img th:src="${post.user.profilePicture}" style="width: 10%">
+                            <h2 th:text = "${post.user.name}"></h2>
+                            <br/>
+                            <p th:unless = "${post.updateAt}">Create At: <i th:text = "${post.createdAt}"></i></p>
+                            <p th:if = "${post.updateAt}">Update At:<i th:text = "${post.updateAt}"></i></p>
+                        </div>
+                        <div>
+                            <li><a th:href="@{/user/update-post/{code}(code =${post.code})}">Update Post</a></li>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 th:text = "${post.content}"></h3>
+                    </div>
+                    <div th:each="picture:${post.pictures}">
+                        <img th:src="${picture.url}" style="width: 40%">
+                    </div>
+                    <div>
+                        <li>
+                            <a th:href="@{/comment/create-a-comment-user/{userName}/{postCode}(userName = ${getName},postCode = ${post.code})}">Comment</a>
+                        </li>
+                    </div>
+                    <div th:if = "${post.comments}">
+                        <div th:each="comment:${post.comments}">
+                            <div style="display: flex">
+                                <div>
+                                    <img th:src="${comment.picture}" style="width: 10%">
+                                </div>
+                                <div>
+                                    <b><h2 th:text = "${comment.userEmail}"></h2></b>
+                                </div>
+                                <div>
+                                    <h2 th:text ="${comment.content}"></h2>
+                                </div>
+                            </div>
+                            <div>
+                                <p th:if = "${comment.updateAt}">
+                                    <i th:text = "${comment.updateAt}"></i>
+                                </p>
+                                <p th:unless = "${comment.updateAt}">
+                                    <i th:text = "${comment.createAt}"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </button>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<div  style="width:50%" align="center">
+    <hr>
+    <h1 >Insert Employee</h1>
+
+    <form th:action="@{/insert}" th:object="${newEmployee}" method="POST">
+        <input type="text" th:field="${newEmployee.Name}" placeholder="Name" pattern="[a-zA-Z ]{6,20}"
+               title="Name is not valid. Form: [a-zA-Z ]{6,20}"><br/>
+        <br/>
+
+        <input type="text" th:field="${newEmployee.Age}" placeholder="Age" pattern="^[1-9]{1}[0-9]{1}$"
+               title="Age is not valid. Form: [0-9]{1,2}">
+        <br/><br/>
+        <input type="text" th:field="${newEmployee.Email}" placeholder="Email"
+               pattern="[A-Za-z0-9]+@[a-z0-9]+\.[a-z]{2,6}"
+               title="Email is not valid. Form: [A-Za-z0-9]+@[a-z0-9]+\.[a-z]{2,6}"><br/><br/>
+
+
+        <button style = "background-color: aqua">
+            <a th:href="@{/}"> Back List</a>
+        </button>
+
+        <button type="submit">Save</button>
+    </form>
+    <hr>
+
+
+
+</div>
+</body>
+</html>

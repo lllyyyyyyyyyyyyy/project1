@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {background-color: dimgrey;}
+    h1 {color: azure;}
+    p {color: blue;}
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: #111111;
+    }
+    input, select {
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body align="center">
+
+<div align="center"   style="background-color: #333333;width: 90%;top: 50%;left: 50%;transform: translate(-50%, -50%);position: absolute" >
+  <form th:action="@{/get-course}" method="POST">
+    <h1>Choose a course:</h1>
+      <select id="course_id" name="course_id" style="padding: 20px 20px;border-radius:15px">
+        <option value="K62" >K62</option>
+        <option value="K63">K63</option>
+        <option value="K64">K64</option>
+      </select>
+    <br/>
+
+      <input type="submit" style="background-color: darkcyan;border-radius:15px">
+    <br/>
+
+  </form>
+
+
+  <br/>
+  <br/>
+</div>
+<div align="center">
+
+  <h3 align="center">List Of Student</h3>
+  <table align="center" style="width:50%" border="1" >
+    <thead style="background-color: darkslateblue">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Date Of Birth</th>
+      <th>Address</th>
+      <th>ID Class</th>
+      <th>ID Courses</th>
+      <th>
+        <button style="background-color: aqua">
+          <a href="/addStudent">insert student</a>
+        </button>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student:${list2}" align="center">
+      <td th:text="${student.id}"></td>
+      <td th:text="${student.name}"></td>
+      <td th:text="${student.date_of_birth}"></td>
+      <td th:text="${student.address}"></td>
+      <td th:text="${student.class_id}"></td>
+      <td th:text="${student.courses_id}"></td>
+      <td>
+        <button style="background-color: aqua">
+          <a th:href="@{/update/{id}(id=${student.id})}">Update</a>
+        </button>
+        <button style="background-color: aqua">
+          <a th:href="@{delete/{id}(id=${student.id})}">Delete</a>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+  <br/>
+
+
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+
+        }
+
+        h2{
+            display: inline-block;
+            margin: 20px 0;
+            color: azure;
+        }
+        li {
+            float: left;
+        }
+
+        li a:hover {
+            background-color: #111111;
+        }
+
+        table{
+            background-color: antiquewhite;
+            text-align: center;
+            font-size: 26px;
+            padding: 10px;
+        }
+
+        body {
+            background-color: dimgrey;
+        }
+        button{
+            display: block;
+            padding: 0;
+            background-color: cornflowerblue;
+            color: #555;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .content {
+            display: flex;
+        }
+        .left-menu {
+            top: 65px;
+            width: 280px;
+            height: 100%;
+            padding: 7px;
+            overflow: hidden;
+            background-color: #333333;
+            position: fixed;
+            display: flex;
+        }
+        .description {
+            margin-left: 30%;
+            margin-top: 10%;
+        }
+        .header{
+            list-style-type: none;
+            top: 0;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="header">
+                    <div><li><a style="font-family:'Courier New';font-size:30px"><b>facebook</b></a></li></div>
+
+                    <div>
+                        <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>
+                    </div>
+                    <!--        <div th:if="${roles}">-->
+                    <!--            <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>-->
+                    <!--        </div>-->
+        </div>
+        <div class="content">
+            <div class="left-menu">
+                <ul style="color: azure">
+                    <div>
+                        <li><a th:href="@{/home}">Home</a></li>
+                    </div>
+                    <br/><br/><br/>
+                    <div>
+                        <li><a th:href="@{/group/home}">Group</a></li>
+                    </div>
+                    <div>
+                        <ul style="color: azure">
+                            <div>
+                                <li><a th:href="@{/group/create/{userName}(userName =${getName})}">Create New Group</a></li>
+                            </div>
+                            <div>
+                                <li><a>List Of Group</a></li>
+                            </div>
+                            <li th:if="${groups}">
+                                <br/><br/><br/><br/><br/><br/>
+                                <ul th:each="group:${groups}">
+                                    <li><a th:text = "${group.name}" th:href="@{/group/get-group-by-groupCode/{groupCode}(groupCode =${group.code})}"></a></li>
+<!--                                        <div th:if="${#lists.contains(userGroup.groupCode, group.code)}">-->
+<!--                                            <a th:href="@{/group/join-group/{userName}/{groupCode}(userName =${getName},groupCode =${group.code})}">Join Group</a>-->
+<!--                                        </div>-->
+
+<!--                                            <div th:if="${#lists.contains(roles, 'ADMIN-GROUP') && #lists.contains(userGroup.groupCode, group.code) }">-->
+<!--                                                <a th:href="@{/group/add-member/{userName}(userName =${getName})}">Add Member</a>-->
+<!--                                            </div>-->
+
+                                </ul>
+                        </ul>
+                    </div>
+                </ul>
+
+            </div>
+            <div class="description">
+                <div th:if = "${group}">
+                    Group Name:     <h1 th:text="${group.name}"></h1>
+                    <button>
+                        <a th:href="@{/group/members-of-group-{groupCode}(groupCode =${group.code})}">List Of Member</a>
+                    </button>
+
+                    <button>
+                        <a th:href="@{/post/add-post-group-{userName}-{groupCode}(userName =${getName}, groupCode =${group.code})}">Add Post Of Group</a>
+                    </button>
+                </div>
+                <div th:if="${posts}">
+
+
+                    <div th:each="post:${posts}">
+                        <div style="display: flex">
+                            <div>
+                                <img th:src="${post.user.profilePicture}" style="width: 10%">
+                                <h2 th:text = "${post.user.name}"></h2>
+                                <br/>
+                                <p th:unless = "${post.updateAt}">Create At: <i th:text = "${post.createdAt}"></i></p>
+                                <p th:if = "${post.updateAt}">Update At:<i th:text = "${post.updateAt}"></i></p>
+                            </div>
+                            <div>
+                                <li><a th:href="@{/group/update-post/{code}(code =${post.code})}">Update Post</a></li>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 th:text = "${post.content}"></h3>
+                        </div>
+                        <div th:each="picture:${post.pictures}">
+                            <img th:src="${picture.url}" style="width: 40%">
+                        </div>
+                        <div>
+                            <li>
+                                <a th:href="@{/comment/create-a-comment-group-{userName}-{postCode}(userName = ${getName},postCode = ${post.code})}">Comment</a>
+                            </li>
+                        </div>
+
+                        <div th:if = "${post.comments}">
+                            <div th:each="comment:${post.comments}">
+                                <div style="display: flex">
+                                    <div>
+                                        <img th:src="${comment.picture}" style="width: 10%">
+                                    </div>
+                                    <div>
+                                        <b><h2 th:text = "${comment.userEmail}"></h2></b>
+                                    </div>
+                                    <div>
+                                        <h2 th:text ="${comment.content}"></h2>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p th:if = "${comment.updateAt}">
+                                        <i th:text = "${comment.updateAt}"></i>
+                                    </p>
+                                    <p th:unless = "${comment.updateAt}">
+                                        <i th:text = "${comment.createAt}"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div th:if="${errorRole}">
+                    errorRole
+
+                </div>
+                <div th:if="${errorJoin}">
+                    errorJoin
+                </div>
+            </div>
+        </div>
+    </div>
+<!--<ul style="list-style-type: none;-->
+<!--            top: 0;-->
+<!--            width: 100%;-->
+<!--            padding: 0;-->
+<!--            overflow: hidden;-->
+<!--            background-color: #333333;-->
+<!--            position: fixed;">-->
+<!--    <div>-->
+<!--        <div><li><a style="font-family:'Courier New';font-size:30px"><b>facebook</b></a></li></div>-->
+
+<!--        <div>-->
+<!--            <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;        <div th:if="${roles}">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--    </div>-->
+<!--</ul>-->
+<!--<ul style="-->
+<!--            top: 65px;-->
+<!--            width: 280px;-->
+<!--            height: 100%;-->
+<!--            padding: 7px;-->
+<!--            overflow: hidden;-->
+<!--            background-color: #333333;-->
+<!--            position: fixed;-->
+<!--            ">-->
+
+<!--</ul>-->
+
+<!--<div style="-->
+<!--    height: 100%;-->
+<!--    padding-top: 50px;-->
+<!--    padding-left: 276px;-->
+<!--    overflow: hidden;-->
+<!--    background-color: dimgrey;">-->
+
+
+
+<!--</div>-->
+
+</body>
+</html>

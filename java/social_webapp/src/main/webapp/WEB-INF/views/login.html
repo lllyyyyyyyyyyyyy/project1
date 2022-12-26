@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body div {
+      text-align: center;
+    }
+    h3{
+      display: inline-block;
+      margin: 20px 0;
+    }
+    input[type=text], input[type=password] {
+      display: inline-block;
+      width: 30%;
+      /*padding: 12px 20px;*/
+      box-sizing: border-box;
+      margin: 20px 20px;
+      padding: 15px 20px;
+      /*float: right;*/
+      /*padding-left: 0;*/
+      /*padding-bottom: 15px;*/
+      /*padding-top: 15px;*/
+      /*padding-right: 0;*/
+      border-radius:15px;
+      /*float: right;*/
+      /*display: block;*/
+    }
+
+    /*button {*/
+    /*  background-color: aqua;*/
+    /*  width: 60px;*/
+    /*  margin: 10px;*/
+    /*  padding: 10px;*/
+    /*  text-align: center;*/
+    /*}*/
+    button{
+      background-color: dimgrey;
+      text-decoration: none;
+      /*display: block;*/
+      width:30%;
+      padding: 15px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      float: right;
+      margin-right: 33%;
+      /*float: right;*/
+    }
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      text-decoration: none;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a:hover {
+      background-color: #111111;
+    }
+
+  </style>
+</head>
+<body>
+<div style="background-color: #888888;
+        padding: 30px 0;
+        padding-bottom: 100%;
+        padding-top: 150px;
+        color: white;">
+  <h1 style="font-size: 400%">Login Page</h1>
+  <div style="width: 100%" >
+    <form method="POST" th:action = "@{/checklogin}" th:objetc="${loginRequest}" style="width: 100%" >
+
+      <div>
+        <h3><b>Username:</b></h3> <input type="text" name="userName" th:field = "${loginRequest.userName}">
+      </div>
+      <div>
+        <h3><b>Password: </b></h3> <input type="password" name="password" th:field = "${loginRequest.password}">
+      </div>
+      <div th:if="${param.error}">
+        <p><i>Invalid username or password.</i></p>
+      </div>
+      <div th:if="${param.logout}">
+        <p><i>
+          You have been logged out.
+        </i></p>
+      </div>
+      <div th:if="${param.updatesuccess}">
+        <p>
+          <i>
+            You have updated successfully! Please login to continues
+          </i>
+        </p>
+      </div>
+      <button type="submit" style="background-color: darkcyan;border-radius:15px" >Submit</button>
+    </form>
+  </div>
+
+</div>
+</body>
+</html>

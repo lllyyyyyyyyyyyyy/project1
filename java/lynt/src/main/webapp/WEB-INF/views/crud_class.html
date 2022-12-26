@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+
+        }
+
+        h2{
+            display: inline-block;
+            margin: 20px 0;
+            color: azure;
+        }
+        li {
+            float: left;
+        }
+
+        li a:hover {
+            background-color: #111111;
+        }
+
+        table{
+            background-color: antiquewhite;
+            text-align: center;
+            font-size: 26px;
+            padding: 10px;
+        }
+
+        body {
+            background-color: dimgrey;
+        }
+        button{
+            display: block;
+            padding: 10px;
+            background-color: cornflowerblue;
+            color: #555;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<ul style="list-style-type: none;
+            top: 0;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+            position: fixed;">
+    <div>
+        <div>
+            <li><a th:href="@{/}">Home Page</a></li>
+        </div>
+        <div th:if="${#lists.contains(roles, 'ADMIN')}">
+            <li><a th:href="@{/users/crud-user}">User</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles, 'ADMIN') ||#lists.contains(roles, 'STUDENT') || #lists.contains(roles, 'TEACHER')}">
+            <li><a th:href="@{/subject}">Subject</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles, 'ADMIN') || #lists.contains(roles, 'STUDENT') || #lists.contains(roles, 'TEACHER')}">
+            <li><a th:href="@{/classroom}">Classroom</a></li>
+        </div>
+
+        <div th:if="${#lists.contains(roles,'STUDENT') || #lists.contains(roles,'ADMIN') }">
+
+            <li><a th:href="@{/student}">Student</a></li>
+        </div>
+        <li><a href="#about">About</a></li>
+<!--        <li style="float: right;"><a th:href="@{/login}">Login</a></li>-->
+        <div th:if="${roles}">
+            <li style="float: right;"><a th:href="@{/login?logout=true}">Logout</a></li>
+        </div>
+    </div>
+</ul>
+<!--<div w3-include-html="header.html"></div>-->
+<br/>
+<br/><br/>
+<br/>
+<h2>List of class</h2>
+<table align="center" style="width:40%" border="1" >
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>CLass Name</th>
+        <th>Teacher Id</th>
+        <th>CLass Id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="class:${classList}" align="center">
+        <td th:text="${class.id}"></td>
+        <td th:text="${class.name}"></td>
+        <td th:text="${class.teacherId}"></td>
+        <td th:text="${class.classId}"></td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+
+<h2>get infor by inner join 2 table classsubject</h2>
+<br/>
+<table align="center" style="width:95%" border="1" >
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>CLass Id</th>
+        <th>CLass Name</th>
+        <th>Teacher ID</th>
+        <th>Subject ID</th>
+        <th>Subject Name</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Day Of Week</th>
+        <th>Document</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="i:${classAndSubject}" align="center">
+        <td th:text="${i.id}"></td>
+        <td th:text="${i.classId}"></td>
+        <td th:text="${i.classroom?.name}"></td>
+        <td th:text="${i.classroom?.teacherId}"></td>
+        <td th:text="${i.subject?.subjectId}"></td>
+        <td th:text="${i.subject?.name}"></td>
+        <td th:text="${i.subject?.startTime}"></td>
+        <td th:text="${i.subject?.endTime}"></td>
+        <td th:text="${i.subject?.dayOfWeek}"></td>
+        <td th:text="${i.subject?.document}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<h2>get infor by classroom</h2>
+<table align="center" style="width:50%" border="1" >
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>CLass Id</th>
+        <th>CLass Name</th>
+        <th>Teacher ID</th>
+        <th>Schedule</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="i:${classList}" align="center">
+        <td th:text="${i.id}"></td>
+        <td th:text="${i.classId}"></td>
+        <td th:text="${i.name}"></td>
+        <td th:text="${i.teacherId}"></td>
+        <td>
+            <button>
+                <a th:href="@{/classroom/get-schedule/{id}(id =${i.id})}">Schedule</a>
+            </button>
+
+            <button>
+                <a th:href="@{/classroom/student/{classId}(classId =${i.classId})}">Student</a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+
+
+</body>
+</html>

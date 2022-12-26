@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body align="center">
+
+<h1> Insert Course</h1>
+<form th:action="@{/course/insert-course}" th:object="${course}" method="POST">
+    <input type="text" th:field="${course.code}" placeholder="Code" ><br/>
+    <br/>
+
+    <input type="text" th:field="${course.name}" placeholder="Name" pattern="[a-zA-Z0-9 ]{6,20}">
+    <br/><br/>
+
+    <button>
+        <a th:href="@{/course/}">Back</a>
+    </button>
+    <button type="submit" >Save</button>
+</form>
+
+
+<div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body align="center">
+
+<h1> Insert subject</h1>
+<form th:action="@{/subject/insert}" th:object="${subject}" method="POST">
+    <input type="text" th:field="${subject.code}" placeholder="Code" ><br/>
+    <br/>
+
+    <input type="text" th:field="${subject.name}" placeholder="Name" pattern="[a-zA-Z0-9 ]{6,20}">
+    <br/><br/>
+
+    <input type="time" th:field="${subject.startTime}" placeholder="Start Time" ><br/>
+    <br/>
+    <input type="time" th:field="${subject.endTime}" placeholder="End Time" ><br/>
+    <br/>
+    <input type="number" th:field="${subject.dayOfWeek}" placeholder="Day Of Week" ><br/>
+    <br/>
+    <input type="text" th:field="${subject.classroomCode}" placeholder="Classroom Code" ><br/>
+
+    <select id="classroomCode" name="classroomCode">
+        <tr th:each="i:${list}">
+            <option th:value="${i.classroomCode}" th:text="${i.classroomCode}"></option>
+
+        </tr>
+    </select>
+    <br/>
+
+    <button>
+        <a th:href="@{/subject/}">Back</a>
+    </button>
+    <button type="submit" >Save</button>
+</form>
+
+
+<div>
+
+</div>
+</body>
+</html>

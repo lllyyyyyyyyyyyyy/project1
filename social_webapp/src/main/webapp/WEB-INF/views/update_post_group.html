@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style >
+    /*body div {*/
+    /*    text-align: center;*/
+    /*}*/
+    h3{
+      display: inline-block;
+      margin: 20px 0;
+    }
+    input[type=text], input[type=password],input[type=number], select {
+      display: inline-block;
+      width: 30%;
+      box-sizing: border-box;
+      margin: 20px 20px;
+      padding: 15px 20px;
+      border-radius:15px;
+    }
+    button{
+      background-color: dimgrey;
+      text-decoration: none;
+      width:10%;
+      padding: 15px 20px;
+      margin: 20px 20px;
+      box-sizing: border-box;
+
+    }
+  </style>
+</head>
+<body>
+<div style="background-color: #888888;
+        padding: 30px 0;
+        padding-bottom: 100%;
+        padding-top: 100px;
+        color: white;">
+  <h1 style="font-size: 400%;text-align: center" >Update Post From User</h1>
+  <div style="width: 100%" >
+    <form th:action="@{/group/update-post}" th:object="${post}" method="POST">
+      <div align="right" style="padding-right: 38%">
+
+        <input type="hidden" th:field="${post.code}"><br/>
+        <br/>
+        <h3>Content: </h3><input type="text" th:field="${post.content}"  placeholder="Content" ><br/>
+        <br/>
+      </div>
+      <div align="center">
+        <button style="background-color: darkcyan;border-radius:15px" align="center">
+          <a th:href="@{/group/home}">Back</a>
+        </button>
+        <button type="submit" style="background-color: darkcyan;border-radius:15px" align="center" >Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

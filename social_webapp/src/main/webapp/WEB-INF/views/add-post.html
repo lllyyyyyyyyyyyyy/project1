@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>add-post</h1>
+
+<form th:action="@{/post/add-post-user}" th:object="${post}" method="POST" enctype="multipart/form-data">
+  <input type="hidden" id = "userName" th:value="${userName}" name="userName"><br/><br/>
+  <input type="text" th:field="${post.content}" placeholder="content"><br/><br/>
+    <div>
+        <label for="files">Select files:</label>
+        <input type="file" id="files" name="files" multiple><br><br>
+    </div>
+
+  <br/><br/>
+  <button>
+    <a th:href="@{/post/home}">Back</a>
+  </button>
+  <button type="submit" >Save</button>
+</form>
+
+</body>
+</html>

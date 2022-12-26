@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/comment/create-a-comment}" th:object="${comment}" method="POST" >
+  <input type="hidden" id = "userName" th:value="${userName}" name="userName">
+  <input type="hidden" id = "postCode" th:value="${postCode}" name="postCode">
+  <input type="text" th:field="${comment.content}" placeholder="content"><br/><br/>
+  <button type="submit" >Save</button>
+</form>
+</body>
+</html>

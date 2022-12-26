@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>add_post_of_group</h1>
+
+<form th:action="@{/post/add-post-group}" th:object="${post}" method="POST" enctype="multipart/form-data">
+    <input type="hidden" th:field="${post.userEmail}" placeholder="User Email"><br/><br/>
+    <input type="hidden" th:field="${post.userGroupCode}" placeholder="Group Code"><br/><br/>
+    <input type="text" th:field="${post.content}" placeholder="content"><br/><br/>
+    <div>
+        <label for="files">Select files:</label>
+        <input type="file" id="files" name="files" multiple><br><br>
+    </div>
+
+    <br/><br/>
+    <button>
+        <a th:href="@{/post/home}">Back</a>
+    </button>
+    <button type="submit" >Save</button>
+</form>
+
+
+</body>
+</html>
